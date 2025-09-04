@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projecte: La Piràmide de Mario</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .code-block {
+            background-color: #1E293B; /* slate-800 */
+            color: #E2E8F0; /* slate-200 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl">
+
+        <!-- Header -->
+        <header class="bg-[#D4560B] text-white p-6 rounded-xl shadow-lg mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold">Projecte: La Piràmide de Mario</h1>
+            <p class="mt-2 text-orange-200">Un repte clàssic per practicar bucles i lògica.</p>
+        </header>
+
+        <main>
+            <section id="enunciat-mario">
+                <div class="bg-white p-6 rounded-lg shadow space-y-6">
+                    <h2 class="text-2xl font-bold text-[#2156A0] border-b-2 border-[#4FCCE8] pb-2 mb-4">Món 1-1: Recreant la Piràmide</h2>
+                    
+                    <p class="text-slate-700">Cap al final del Món 1-1 a Super Mario Bros., el nostre heroi ha de pujar una piràmide de blocs alineada a la dreta, com aquesta:</p>
+                    
+                    <div class="text-center">
+                        <img src="https://cs50.harvard.edu/x/2023/psets/1/mario/less/pyramid.png" alt="Captura de pantalla de Mario saltant per una piràmide" class="mx-auto max-w-sm w-full h-auto rounded-lg shadow-md">
+                    </div>
+
+                    <h3 class="text-xl font-semibold pt-4">L'Objectiu</h3>
+                    <p>La nostra missió és recrear aquesta piràmide a la terminal utilitzant Python. Farem servir el símbol del coixinet (`#`) per als blocs. El programa ha de demanar a l'usuari l'alçada de la piràmide, que ha de ser un número enter entre 1 i 8.</p>
+
+                    <p>Així és com s'hauria de veure per a una alçada de **4**:</p>
+                    <div class="code-block">
+<pre><code>   #
+  ##
+ ###
+####</code></pre>
+                    </div>
+
+                    <p>I així per a una alçada de **8**:</p>
+                    <div class="code-block">
+<pre><code>       #
+      ##
+     ###
+    ####
+   #####
+  ######
+ #######
+########</code></pre>
+                    </div>
+
+                    <h3 class="text-xl font-semibold pt-4">Requisits del Programa</h3>
+                    <ul class="list-disc list-inside space-y-2 text-slate-700">
+                        <li>El programa ha de demanar a l'usuari: `Alçada: `.</li>
+                        <li>L'usuari ha d'introduir un número enter positiu entre 1 i 8 (inclosos).</li>
+                        <li>Si l'usuari introdueix un número fora d'aquest rang, o text, el programa ha de tornar a demanar l'alçada fins que l'entrada sigui vàlida.</li>
+                        <li>Un cop obtinguda una alçada vàlida, el programa ha de dibuixar la piràmide.</li>
+                    </ul>
+                    
+                    <p>Exemple de com ha de gestionar les entrades invàlides:</p>
+                     <div class="code-block">
+<pre><code>Alçada: -1
+Alçada: 0
+Alçada: 9
+Alçada: hola
+Alçada: 4
+   #
+  ##
+ ###
+####</code></pre>
+                    </div>
+
+
+                    <h3 class="text-xl font-semibold pt-4 border-t border-slate-200 mt-6">Una Estratègia Pas a Pas</h3>
+
+                    <div class="mt-4 p-4 bg-blue-50 border-l-4 border-blue-500 text-blue-800 rounded-r-lg">
+                        <strong class="font-bold">Pas 1: Aconseguir una alçada vàlida</strong>
+                        <p class="mt-1">Abans de dibuixar res, necessitem assegurar-nos que tenim un número correcte. La millor manera de fer-ho és amb un bucle `while` que no s'aturi fins que l'usuari ens doni una dada correcta.</p>
+                        <p class="mt-2"><strong>Pistes:</strong></p>
+                        <ul class="list-disc list-inside text-sm mt-1">
+                            <li>Fes servir un bucle `while True:` per crear un bucle infinit.</li>
+                            <li>Dins del bucle, demana la dada amb `input()`.</li>
+                            <li>Utilitza un bloc `try-except` per controlar si l'usuari introdueix text en lloc d'un número. Si `int()` dona un error (`ValueError`), pots imprimir un missatge i continuar el bucle.</li>
+                            <li>Si la conversió a `int` funciona, comprova amb un `if` si el número està entre 1 i 8.</li>
+                            <li>Si totes les condicions es compleixen, fes servir `break` per sortir del bucle.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 rounded-r-lg">
+                        <strong class="font-bold">Pas 2: Dibuixar la piràmide</strong>
+                        <p class="mt-1">Un cop tinguis l'alçada, necessites un bucle per dibuixar cada fila. Pensa en la lògica per a cada fila:</p>
+                        <p class="mt-2">Per a una alçada `h`, cada fila `i` (començant per 1) té:</p>
+                        <ul class="list-disc list-inside text-sm mt-1">
+                            <li>`h - i` espais en blanc.</li>
+                            <li>`i` coixinets (`#`).</li>
+                        </ul>
+                        <p class="mt-2"><strong>Pistes:</strong></p>
+                         <ul class="list-disc list-inside text-sm mt-1">
+                            <li>Fes servir un bucle `for` que vagi des d'1 fins a l'alçada.</li>
+                            <li>A Python, pots "multiplicar" un text. Per exemple, `" " * 3` crea `"   "`.</li>
+                            <li>Dins del bucle, calcula el nombre d'espais i de coixinets necessaris per a la fila actual.</li>
+                            <li>Imprimeix els espais i els coixinets a la mateixa línia. Recorda que `print()` afegeix un salt de línia al final. Per evitar-ho, pots fer servir `print(text, end="")`.</li>
+                            <li>Després d'imprimir els espais i els coixinets d'una fila, necessites un salt de línia. Un `print()` buit el farà.</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="text-xl font-semibold pt-4 border-t border-slate-200 mt-6">Com Provar el Teu Codi</h3>
+                    <p>Assegura't que el teu programa funciona correctament amb aquestes entrades:</p>
+                    <ul class="list-disc list-inside space-y-1 text-slate-700">
+                        <li>Números negatius (com `-1` o `-5`).</li>
+                        <li>El número `0`.</li>
+                        <li>Números dins del rang (prova amb `1`, `4` i `8`).</li>
+                        <li>Números més grans de 8 (com `9` o `20`).</li>
+                        <li>Text (com `hola` o `quatre`).</li>
+                        <li>Deixar l'entrada buida i prémer Enter.</li>
+                    </ul>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 py-4 border-t border-slate-200 text-sm text-slate-500 space-y-2">
+            <p>&copy; 2025 Vicent Cardona. Departament de tecnologia. IES Quartó de Portmany</p>
+            <p>Aquesta obra està subjecta a una llicència de Creative Commons
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="text-blue-600 hover:underline">CC BY-NC-SA 4.0</a>
+            </p>
+            <p>
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                    <img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="Llicència de Creative Commons" class="inline-block">
+                </a>
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
