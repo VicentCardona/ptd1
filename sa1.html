@@ -56,8 +56,8 @@
                             <li><strong class="font-semibold">Pseudocodi:</strong> És una descripció de l'algorisme utilitzant un llenguatge natural però estructurat, semblant a un llenguatge de programació. És fàcil d'entendre sense necessitat de conèixer una sintaxi específica.</li>
                         </ul>
                         <div class="mt-4 p-4 border border-slate-200 rounded-lg text-center">
-                            
-                            <p class="text-sm text-slate-500 mt-2"><img src="https://tecnologiatecnos4t.weebly.com/uploads/6/1/3/5/61353903/5958478_orig.png" alt="Descripció de la imatge">
+                            <img src="https://tecnologiatecnos4t.weebly.com/uploads/6/1/3/5/61353903/5958478_orig.png" alt="Exemple de diagrama de flux" class="mx-auto max-w-full h-auto rounded">
+                            <p class="text-sm text-slate-500 mt-2">
                                 Exemple de diagrama de flux per calcular la suma de tots els nombres parells fins a 100.</p>
                         </div>
                     </div>
@@ -74,10 +74,10 @@
                         </ul>
                         <div class="code-block mt-4">
 <pre><code># Exemple de variables en Python
-edat = 16               # Integer
-altura = 1.75           # Float
-nom = "Maria"           # String
-es_major_edat = False   # Boolean
+edat = 16            # Integer
+altura = 1.75        # Float
+nom = "Maria"        # String
+es_major_edat = False # Boolean
 
 print(f"{nom} té {edat} anys.")</code></pre>
                         </div>
@@ -96,9 +96,9 @@ print(f"{nom} té {edat} anys.")</code></pre>
                 </div>
             </section>
 
-            <!-- Secció 2: Estratègies i Estructures Avançades -->
+            <!-- Secció 2: Estructures de Control -->
             <section id="avancat">
-                <h2 class="text-2xl font-bold text-[#2156A0] border-b-2 border-[#4FCCE8] pb-2 mb-4">2. Estratègies i Estructures Avançades</h2>
+                <h2 class="text-2xl font-bold text-[#2156A0] border-b-2 border-[#4FCCE8] pb-2 mb-4">2. Estructures de Control</h2>
                 <div class="space-y-8 bg-white p-6 rounded-lg shadow">
                     
                     <!-- Bucles Imbricats -->
@@ -106,7 +106,15 @@ print(f"{nom} té {edat} anys.")</code></pre>
                         <h3 class="text-xl font-semibold mb-2">2.1. Bucles Imbricats</h3>
                         <p>Un bucle imbricat és un bucle dins d'un altre bucle. Són molt útils per treballar amb estructures de dades de dues dimensions, com taules, o per crear patrons.</p>
                         <p class="mt-2">Imagina que vols dibuixar un quadrat de 4x4 asteriscs. Necessites un bucle "exterior" que controli les files i un bucle "interior" que controli les columnes (els asteriscs de cada fila).</p>
-                        <div class="code-block mt-4">
+                        
+                        <!-- Video Bucles -->
+                        <div class="mt-6">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <iframe class="w-full h-full rounded-lg shadow-md" src="https://www.youtube.com/embed/Q926pylOIs8?si=BkBqVy0p7DHkRfvr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                        </div>
+
+                        <div class="code-block mt-6">
 <pre><code># Dibuixem un quadrat de 4x4
 # El bucle exterior s'executa 4 cops (un per cada fila)
 for i in range(4):
@@ -121,6 +129,35 @@ for i in range(4):
 # * * * * # * * * * # * * * * # * * * * </code></pre>
                         </div>
                         <p class="mt-4">Per cada iteració del bucle exterior, el bucle interior s'executa completament. Això ens permet recórrer tots els elements d'una graella o matriu.</p>
+
+                        <h4 class="text-lg font-semibold mt-6 mb-2">Més exemples de Bucles Imbricats</h4>
+                        <p class="mt-4"><strong class="font-semibold">1. Recórrer una matriu (llista de llistes):</strong> Són perfectes per accedir a cada element d'una estructura bidimensional.</p>
+                        <div class="code-block mt-2">
+<pre><code># Una matriu 3x3
+matriu = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# El bucle exterior itera sobre les files
+for fila in range(len(matriu)):
+    # El bucle interior itera sobre les columnes de la fila actual
+    for columna in range(len(matriu[fila])):
+        print(f"Element a la posició ({fila}, {columna}): {matriu[fila][columna]}")
+</code></pre>
+                        </div>
+
+                        <p class="mt-4"><strong class="font-semibold">2. Crear una taula de multiplicar:</strong> Podem generar contingut tabulat de forma senzilla.</p>
+                        <div class="code-block mt-2">
+<pre><code># Taula de multiplicar fins al 5
+for i in range(1, 6): # Files (número a multiplicar)
+    for j in range(1, 11): # Columnes (multiplicador)
+        print(f"{i} x {j} = {i*j}\t", end="") # \t afegeix una tabulació
+    print() # Salt de línia per a la següent taula
+</code></pre>
+                        </div>
+
                     </div>
 
                     <!-- Funcions Pròpies -->
@@ -207,27 +244,122 @@ print(f"La mitjana de la classe és: {mitjana_final:.2f}")</code></pre>
                             <li><strong class="font-semibold">Cas base:</strong> Una condició que atura la recursivitat. Sense ell, la funció es cridaria a si mateixa infinitament.</li>
                             <li><strong class="font-semibold">Cas recursiu:</strong> La part de la funció on es torna a cridar a si mateixa, però amb un problema lleugerament més senzill.</li>
                         </ul>
-                        <p class="mt-2"><strong class="font-semibold">Exemple:</strong> Calcular el factorial d'un nombre (ex: 5! = 5 * 4 * 3 * 2 * 1).</p>
-                        <div class="code-block mt-4">
-<pre><code>def factorial(n):
-    # Cas base: si n és 1, el factorial és 1. Aquí s'atura.
-    if n == 1:
-        return 1
-    # Cas recursiu: n * factorial(n-1)
-    else:
-        return n * factorial(n - 1)
-
-# Com funciona per factorial(4)?
-# 1. factorial(4) -> 4 * factorial(3)
-# 2. factorial(3) -> 3 * factorial(2)
-# 3. factorial(2) -> 2 * factorial(1)
-# 4. factorial(1) -> retorna 1 (cas base)
-# Ara, es reconstrueix el resultat: 2 * 1 = 2 -> 3 * 2 = 6 -> 4 * 6 = 24
-
-resultat = factorial(4)
-print(f"El factorial de 4 és: {resultat}") # Sortida: 24</code></pre>
+                        
+                        <!-- Video Section -->
+                        <div class="mt-6">
+                            <div class="aspect-w-16 aspect-h-9">
+                                <iframe class="w-full h-full rounded-lg shadow-md" src="https://www.youtube.com/embed/5-7_PT0HG30?si=0JxkVxBZfmlOhfvL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
                         </div>
-                        <p class="mt-4">La recursivitat és un concepte molt potent, especialment útil en problemes matemàtics i en l'exploració d'estructures de dades complexes.</p>
+
+                        <!-- Comparativa Recursivitat vs Bucles -->
+                        <div class="mt-8">
+                            <h4 class="text-lg font-semibold mt-6 mb-2">Recursivitat vs. Bucles: Quan fer servir cada un?</h4>
+                            <p>Tot i que la recursivitat és molt elegant, no sempre és la millor opció. Un bucle sovint és més eficient (més ràpid i consumeix menys memòria).</p>
+                            <div class="grid md:grid-cols-2 gap-6 mt-4">
+                                <!-- Columna Bucle -->
+                                <div>
+                                    <h5 class="font-semibold text-center mb-2">Bucle (Iteració)</h5>
+                                    <div class="code-block">
+<pre><code># Sumar amb un bucle
+def suma_bucle(n):
+    total = 0
+    for i in range(1, n + 1):
+        total += i
+    return total
+
+print(suma_bucle(5)) # 15
+</code></pre>
+                                    </div>
+                                    <ul class="list-disc list-inside mt-2 text-sm space-y-1">
+                                        <li><strong class="font-semibold text-green-600">Avantatges:</strong> Més ràpid, menys ús de memòria.</li>
+                                        <li><strong class="font-semibold text-red-600">Inconvenients:</strong> El codi pot ser més llarg o menys intuïtiu.</li>
+                                    </ul>
+                                </div>
+                                <!-- Columna Recursivitat -->
+                                <div>
+                                    <h5 class="font-semibold text-center mb-2">Recursivitat</h5>
+                                    <div class="code-block">
+<pre><code># Sumar amb recursivitat
+def suma_recursiva(n):
+    if n <= 1:
+        return n # Cas base
+    else:
+        return n + suma_recursiva(n-1)
+
+print(suma_recursiva(5)) # 15
+</code></pre>
+                                    </div>
+                                    <ul class="list-disc list-inside mt-2 text-sm space-y-1">
+                                        <li><strong class="font-semibold text-green-600">Avantatges:</strong> Codi més net i llegible per a problemes divisibles.</li>
+                                        <li><strong class="font-semibold text-red-600">Inconvenients:</strong> Més lent. Pot causar "Stack Overflow" si es crida massa vegades.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <p class="mt-4 p-4 bg-blue-100 border-l-4 border-blue-500 text-blue-800 rounded-r-lg">
+                                <strong class="font-bold">Conclusió:</strong> Fes servir bucles per a tasques repetitives simples. Reserva la recursivitat per a problemes que són naturalment recursius, com treballar amb arbres de dades o fractals.
+                            </p>
+                        </div>
+                        
+                        <!-- Més Exemples -->
+                        <div class="mt-8">
+                            <h4 class="text-lg font-semibold mt-6 mb-2">Més Exemples de Recursivitat</h4>
+                            
+                            <!-- Compte enrere -->
+                            <p class="mt-4"><strong class="font-semibold">1. Compte enrere:</strong> Una funció simple que es crida a si mateixa fins a arribar a zero.</p>
+                            <div class="code-block mt-2">
+<pre><code>def compte_enrere(n):
+    print(n)
+    if n == 0:
+        return # Cas base: s'atura
+    else:
+        compte_enrere(n - 1) # Cas recursiu
+
+compte_enrere(5)
+# Sortida: 5 4 3 2 1 0
+</code></pre>
+                            </div>
+
+                            <!-- Fibonacci -->
+                            <p class="mt-4"><strong class="font-semibold">2. Càlcul de Fibonacci:</strong> Un exemple clàssic on cada número és la suma dels dos anteriors (1, 1, 2, 3, 5, 8...). Aquesta implementació és elegant però molt ineficient.</p>
+                            <div class="code-block mt-2">
+<pre><code>def fibonacci(n):
+    if n <= 1:
+        return n # Cas base per n=0 i n=1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+print(fibonacci(7)) # Sortida: 13
+</code></pre>
+                            </div>
+
+                            <!-- Exemple no matemàtic -->
+                            <p class="mt-4"><strong class="font-semibold">3. Exemple no matemàtic: Explorar carpetes:</strong> La recursivitat és perfecta per a estructures imbricades, com un sistema de carpetes i fitxers.</p>
+                            <div class="code-block mt-2">
+<pre><code># Simulem una estructura de carpetes
+sistema_arxius = {
+    'documents': ['cv.pdf', 'carta.docx'],
+    'fotos': {
+        'vacances': ['platja.jpg', 'muntanya.jpg'],
+        'familia': ['aniversari.jpg']
+    },
+    'programes': ['joc.exe']
+}
+
+def explorar(directori, nivell=0):
+    prefix = '  ' * nivell # Indentació per veure la jerarquia
+    for nom, contingut in directori.items():
+        if isinstance(contingut, dict): # És una subcarpeta
+            print(f"{prefix}[{nom}]")
+            explorar(contingut, nivell + 1)
+        else: # És una llista de fitxers
+            print(f"{prefix}[{nom}] -> {contingut}")
+
+explorar(sistema_arxius)
+</code></pre>
+                            </div>
+
+                        </div>
                     </div>
 
                 </div>
@@ -235,19 +367,64 @@ print(f"El factorial de 4 és: {resultat}") # Sortida: 24</code></pre>
         </main>
 
         <!-- Footer -->
-        <footer class="text-center mt-12 py-4 border-t border-slate-200">
-            <p>cc 2025 Vicent Cardona Departament de tecnologia. IES Quartó de Portmany</p>
-        <p>Aquesta obra està subjecta a una llicència de Creative Commons
-            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
-        </p>
-        <p>
-            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-                <img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="Llicència de Creative Commons">
-            </a>
-        </p>
+        <footer class="text-center mt-12 py-4 border-t border-slate-200 text-sm text-slate-500 space-y-2">
+            <p>&copy; 2025 Vicent Cardona. Departament de tecnologia. IES Quartó de Portmany</p>
+            <p>Aquesta obra està subjecta a una llicència de Creative Commons
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="text-blue-600 hover:underline">CC BY-NC-SA 4.0</a>
+            </p>
+            <p>
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                    <img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="Llicència de Creative Commons" class="inline-block">
+                </a>
+            </p>
         </footer>
 
     </div>
-
+    <!-- Script for responsive youtube video -->
+    <script>
+        // This is a common polyfill for aspect-ratio
+        if (typeof window !== 'undefined') {
+            const module =
+                (function() {
+                if (window.CSS && window.CSS.supports && window.CSS.supports('aspect-ratio: 1 / 1')) {
+                    return
+                }
+                const isBrowser = typeof window !== 'undefined'
+                const sheet = (function() {
+                    if (!isBrowser) return undefined
+                    const el = document.createElement('style')
+                    document.head.appendChild(el)
+                    return el.sheet
+                })()
+                function d(e) {
+                    const t = e.split('-')
+                    const r = t[t.length - 1].split('/')
+                    return [r[0], r[1]]
+                }
+                function o(e) {
+                    const t = document.querySelectorAll(e)
+                    for (const r of t) {
+                        const t = r.className
+                        const o = t.split(' ').find(e => e.startsWith('aspect-w-'))
+                        const a = t.split(' ').find(e => e.startsWith('aspect-h-'))
+                        if (!o || !a) continue
+                        const s = d(o)
+                        const i = d(a)
+                        const c = `calc(${s[0]} / ${i[0]} * 100%)`
+                        const l = `.${CSS.escape(o)}.${CSS.escape(a)}`
+                        const n = `${l} > *`
+                        if (!sheet) continue
+                        sheet.insertRule(`${l} { position: relative; padding-bottom: ${c}; }`, sheet.cssRules.length)
+                        sheet.insertRule(
+                            `${n} { position: absolute; height: 100%; width: 100%; top: 0; right: 0; bottom: 0; left: 0; }`,
+                            sheet.cssRules.length
+                        )
+                    }
+                }
+                o('.aspect-w-16.aspect-h-9')
+                })()
+        }
+    </script>
 </body>
 </html>
+
