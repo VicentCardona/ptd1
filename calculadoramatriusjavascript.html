@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Matrius Incrustable</title>
+
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            max-width: 900px; 
+            margin: auto; 
+            padding: 20px; 
+            background-color: #f9f9f9;
+        }
+        h1 { color: #333; }
+        textarea { 
+            width: 300px; 
+            height: 100px; 
+            margin-bottom: 10px; 
+            font-family: monospace;
+            font-size: 1rem;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .calculadora { display: flex; flex-wrap: wrap; gap: 20px; }
+        .entrades { display: flex; gap: 20px; }
+        .controls { display: flex; flex-direction: column; gap: 10px; }
+        button { 
+            padding: 10px 15px; 
+            font-size: 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover { background-color: #0056b3; }
+        #resultat-contenidor { 
+            margin-top: 20px; 
+            padding: 15px; 
+            background-color: #e9ecef; 
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            white-space: pre; /* Manté el format del text (espais i salts de línia) */
+            font-family: monospace;
+            font-size: 1.1rem;
+            min-height: 50px;
+        }
+        .error { color: #d93025; font-weight: bold; }
+    </style>
+    </head>
+<body>
+    <h1>Calculadora de Matrius Interactiva ⚡</h1>
+    <p>Introdueix els números separats per espais i les files en línies diferents.</p>
+    
+    <div class="calculadora">
+        <div class="entrades">
+            <div>
+                <label for="matriu_a">Matriu A:</label><br>
+                <textarea id="matriu_a" placeholder="1 2 3&#10;4 5 6"></textarea>
+            </div>
+            <div>
+                <label for="matriu_b">Matriu B (per a suma/mult.):</label><br>
+                <textarea id="matriu_b" placeholder="7 8&#10;9 1&#10;2 3"></textarea>
+            </div>
+        </div>
+        <div class="controls">
+            <label for="operacio">Tria una operació:</label><br>
+            <select id="operacio">
+                <option value="sumar">Suma (A + B)</option>
+                <option value="multiplicar">Multiplicació (A * B)</option>
+                <option value="transposada">Transposada (de A)</option>
+                <option value="determinant">Determinant 2x2 (de A)</option>
+                <option value="inversa">Inversa 2x2 (de A)</option>
+            </select>
+            <button id="calcular-btn">Calcular</button>
+        </div>
+    </div>
+
+    <div id="resultat-contenidor"></div>
+
+    <script>
+        // --- 1. Connexió amb els elements de l'HTML ---
+        const matriuAText = document.getElementById('matriu_a');
+        const matriuBText = document.getElementById('matriu_b');
+        const operacioSelect = document.getElementById('operacio');
+        const calcularBtn = document.getElementById('calcular-btn');
+        const resultatContenidor = document.getElementById('resultat-contenidor');
+
+        // --- 2. Funcions de càlcul (Lògica interna) ---
+        function textAMatriu(text) {
+            try {
+                const files = text.trim().split('\n');
+                const matriu = files.map(fila => fila.trim().split(/\s+/).map(Number));
+                // Verifiquem que no hi hagi files buides o valors no numèrics (NaN)
+                if (matriu.some(fila => fila.some(isNaN) || fila.length === 0)) return null;
+                return matriu;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function matriuAText(matriu) {
+            if (typeof matriu === 'string' || typeof matriu === 'number') {
+                return matriu.toString();
+            }
+            // Formatem els números per evitar massa decimals
+            return matriu.map(fila => 
+                fila.map(num => Number(num.toFixed(4))).join('\t')
+            ).join('\n');
+        }
+
+        function sumarMatrius(A, B) {
+            if (A.length !== B.length || A[0].length !== B[0].length) {
+                return "Error: Les matrius han de tenir les mateixes dimensions.";
+            }
+            return A.map((fila, i) => fila.map((val, j) => val + B[i][j]));
+        }
+
+        function multiplicarMatrius(A, B) {
+            const filesA = A.length, colsA = A[0].length, filesB = B.length, colsB = B[0].length;
+            if (colsA !== filesB) {
+                return "Error: Dimensions incompatibles.";
+            }
+            const resultat = Array(filesA).fill(0).map(() => Array(colsB).fill(0));
+            for (let i = 0; i < filesA; i++) {
+                for (let j = 0; j < colsB; j++) {
+                    for (let k = 0; k < colsA; k++) {
+                        resultat[i][j] += A[i][k] * B[k][j];
+                    }
+                }
+            }
+            return resultat;
+        }
+
+        function transposadaMatriu(A) {
+            const files = A.length, cols = A[0].length;
+            const resultat = Array(cols).fill(0).map(() => Array(files).fill(0));
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < files; j++) {
+                    resultat[i][j] = A[j][i];
+                }
+            }
+            return resultat;
+        }
+
+        function determinant2x2(A) {
+            if (A.length !== 2 || A[0].length !== 2) {
+                return "Error: Aquesta funció només accepta matrius 2x2.";
+            }
+            return A[0][0] * A[1][1] - A[0][1] * A[1][0];
+        }
+
+        function inversa2x2(A) {
+            const det = determinant2x2(A);
+            if (typeof det === 'string') return det;
+            if (det === 0) return "Error: La matriu no té inversa (determinant és zero).";
+            const factor = 1 / det;
+            return [
+                [factor * A[1][1], factor * -A[0][1]],
+                [factor * -A[1][0], factor * A[0][0]]
+            ];
+        }
+
+        // --- 3. L'esdeveniment principal ---
+        calcularBtn.addEventListener('click', () => {
+            const matriuA = textAMatriu(matriuAText.value);
+            const matriuB = textAMatriu(matriuBText.value);
+            const operacio = operacioSelect.value;
+            let resultat;
+
+            if (!matriuA) {
+                resultat = "<span class='error'>Error en el format de la Matriu A.</span>";
+                resultatContenidor.innerHTML = resultat;
+                return;
+            }
+
+            switch (operacio) {
+                case 'sumar':
+                    if (!matriuB) resultat = "<span class='error'>Error en el format de la Matriu B.</span>";
+                    else resultat = sumarMatrius(matriuA, matriuB);
+                    break;
+                case 'multiplicar':
+                    if (!matriuB) resultat = "<span class='error'>Error en el format de la Matriu B.</span>";
+                    else resultat = multiplicarMatrius(matriuA, matriuB);
+                    break;
+                case 'transposada':
+                    resultat = transposadaMatriu(matriuA);
+                    break;
+                case 'determinant':
+                    resultat = determinant2x2(matriuA);
+                    break;
+                case 'inversa':
+                    resultat = inversa2x2(matriuA);
+                    break;
+                default:
+                    resultat = "<span class='error'>Operació no reconeguda.</span>";
+            }
+
+            if (typeof resultat === 'string' && resultat.startsWith("Error:")) {
+                resultatContenidor.innerHTML = `<span class='error'>${resultat}</span>`;
+            } else {
+                resultatContenidor.innerHTML = `<strong>Resultat:</strong>\n${matriuAText(resultat)}`;
+            }
+        });
+    </script>
+    </body>
+</html>
