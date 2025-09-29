@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projecte: El Pot de Galetes (POO)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .code-block {
+            background-color: #1E293B; /* slate-800 */
+            color: #E2E8F0; /* slate-200 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl">
+
+        <!-- Header -->
+        <header class="bg-[#D4560B] text-white p-6 rounded-xl shadow-lg mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold">Projecte: El Pot de Galetes</h1>
+            <p class="mt-2 text-orange-200">Una pràctica completa de Programació Orientada a Objectes.</p>
+        </header>
+
+        <main>
+            <section id="enunciat-pot">
+                <div class="bg-white p-6 rounded-lg shadow space-y-6">
+                    <h2 class="text-2xl font-bold text-[#2156A0] border-b-2 border-[#4FCCE8] pb-2 mb-4">L'Objectiu del Projecte</h2>
+                    
+                    <p class="text-slate-700">En aquest projecte, aplicarem tot el que hem après sobre Programació Orientada a Objectes per crear una classe que simuli el comportament d'un pot de galetes. Crearem una classe <code class="language-plaintext highlighter-rouge">Pot</code> des de zero, definint els seus atributs i mètodes per gestionar les galetes que conté.</p>
+                    
+                    <div class="text-center my-4">
+                        <img src="https://media.giphy.com/media/Q73g0HDX6hW5G/giphy.gif" alt="Monstre de les Galetes" class="mx-auto max-w-sm w-full h-auto rounded-lg shadow-md">
+                        <p class="text-sm text-slate-500 mt-2">Font: Sesame Street</p>
+                    </div>
+
+                    <h3 class="text-xl font-semibold pt-4">Especificacions de la Classe `Pot`</h3>
+                    <p>Hauràs de crear un fitxer anomenat <code class="language-plaintext highlighter-rouge">pot.py</code> i implementar una classe anomenada <code class="language-plaintext highlighter-rouge">Pot</code> que tingui els següents mètodes i propietats:</p>
+                    
+                    <ul class="list-disc list-inside space-y-3 text-slate-700 mt-4">
+                        <li>
+                            <strong class="font-semibold">`__init__(self, capacitat=12)`</strong>: El constructor ha d'inicialitzar el pot de galetes amb una `capacitat` màxima. Si la `capacitat` no és un número enter no negatiu (és a dir, ≥ 0), ha de llançar un error <code class="language-plaintext highlighter-rouge">ValueError</code>. El nombre inicial de galetes al pot sempre és 0.
+                        </li>
+                        <li>
+                            <strong class="font-semibold">`__str__(self)`</strong>: Aquest mètode ha de retornar un text que representi les galetes al pot. Per cada galeta, ha de mostrar l'emoji "🍪". Per exemple, si hi ha 3 galetes, ha de retornar `"🍪🍪🍪"`.
+                        </li>
+                        <li>
+                            <strong class="font-semibold">`deposit(self, n)`</strong>: Afegeix `n` galetes al pot. Si en afegir-les se supera la `capacitat` del pot, ha de llançar un <code class="language-plaintext highlighter-rouge">ValueError</code>.
+                        </li>
+                        <li>
+                            <strong class="font-semibold">`withdraw(self, n)`</strong>: Treu `n` galetes del pot. Si no hi ha suficients galetes per treure, ha de llançar un <code class="language-plaintext highlighter-rouge">ValueError</code>.
+                        </li>
+                        <li>
+                            <strong class="font-semibold">`capacity` (propietat)</strong>: Ha de retornar la capacitat màxima del pot.
+                        </li>
+                        <li>
+                            <strong class="font-semibold">`size` (propietat)</strong>: Ha de retornar el nombre de galetes que hi ha actualment al pot.
+                        </li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold pt-4 border-t border-slate-200 mt-6">Estructura Base del Codi</h3>
+                    <p>Pots començar amb aquesta plantilla al teu fitxer <code class="language-plaintext highlighter-rouge">pot.py</code>:</p>
+                    <div class="code-block">
+<pre><code>class Pot:
+    def __init__(self, capacitat=12):
+        # Aquí va la teva implementació
+        ...
+
+    def __str__(self):
+        # Aquí va la teva implementació
+        ...
+
+    def deposit(self, n):
+        # Aquí va la teva implementació
+        ...
+
+    def withdraw(self, n):
+        # Aquí va la teva implementació
+        ...
+
+    @property
+    def capacity(self):
+        # Aquí va la teva implementació
+        ...
+
+    @property
+    def size(self):
+        # Aquí va la teva implementació
+        ...
+</code></pre>
+                    </div>
+
+                    <h3 class="text-xl font-semibold pt-4 border-t border-slate-200 mt-6">Guia Pas a Pas</h3>
+                     <div class="mt-4 p-4 bg-blue-50 border-l-4 border-blue-500 text-blue-800 rounded-r-lg space-y-2">
+                        <strong class="font-bold">1. El Constructor (`__init__`)</strong>
+                        <p>Aquesta és la part més important. Has de validar la `capacitat`. A més, necessitaràs un atribut "privat" per guardar el nombre actual de galetes, per exemple `self._galetes = 0`, i un altre per a la capacitat, `self._capacitat = capacitat`.</p>
+                    </div>
+                     <div class="mt-4 p-4 bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 rounded-r-lg space-y-2">
+                        <strong class="font-bold">2. Les Propietats (`capacity` i `size`)</strong>
+                        <p>Les propietats són mètodes que es comporten com atributs. Són la manera correcta d'exposar els valors interns de forma segura. El mètode `capacity` ha de retornar `self._capacitat` i `size` ha de retornar `self._galetes`.</p>
+                    </div>
+                     <div class="mt-4 p-4 bg-sky-50 border-l-4 border-sky-500 text-sky-800 rounded-r-lg space-y-2">
+                        <strong class="font-bold">3. Afegir i Treure Galetes (`deposit` i `withdraw`)</strong>
+                        <p>Aquests mètodes han de modificar el valor de `self._galetes`. Abans de fer-ho, comprova si l'operació és vàlida (no superar la capacitat o no treure més galetes de les que hi ha). Si no ho és, llança un `ValueError`.</p>
+                    </div>
+                    <div class="mt-4 p-4 bg-amber-50 border-l-4 border-amber-500 text-amber-800 rounded-r-lg space-y-2">
+                        <strong class="font-bold">4. Representació Visual (`__str__`)</strong>
+                        <p>Aquest mètode ha de retornar un text format per tants emojis "🍪" com galetes hi hagi al pot. Recorda que a Python pots "multiplicar" un text: `"🍪" * 3` retorna `"🍪🍪🍪"`.</p>
+                    </div>
+
+                    <h3 class="text-xl font-semibold pt-4 border-t border-slate-200 mt-6">Com Provar el Teu Codi</h3>
+                    <p>Un cop tinguis la teva classe implementada a <code class="language-plaintext highlighter-rouge">pot.py</code>, pots crear un altre fitxer anomenat <code class="language-plaintext highlighter-rouge">test.py</code> per provar que tot funciona com esperes. Aquí tens un exemple de com podries fer-ho:</p>
+                    <div class="code-block">
+<pre><code>from pot import Pot
+
+# Creem un pot amb capacitat per a 10 galetes
+pot = Pot(10)
+
+print(f"Capacitat inicial: {pot.capacity}")
+print(f"Galetes inicials: {pot.size}")
+print(f"Pot inicial: {pot}")
+
+# Afegim galetes
+pot.deposit(5)
+print(f"Després de dipositar 5: {pot}")
+
+# Traiem galetes
+pot.withdraw(2)
+print(f"Després de treure 2: {pot}")
+
+# Intentem fer una operació invàlida (hauria de donar un error)
+try:
+    pot.deposit(10)
+except ValueError as e:
+    print(f"Error esperat: {e}")
+
+</code></pre>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-12 py-4 border-t border-slate-200 text-sm text-slate-500 space-y-2">
+            <p>&copy; 2025 Vicent Cardona. Departament de tecnologia. IES Quartó de Portmany</p>
+            <p>Aquesta obra està subjecta a una llicència de Creative Commons
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="text-blue-600 hover:underline">CC BY-NC-SA 4.0</a>
+            </p>
+            <p>
+                <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+                    <img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="Llicència de Creative Commons" class="inline-block">
+                </a>
+            </p>
+        </footer>
+
+    </div>
+</body>
+</html>
